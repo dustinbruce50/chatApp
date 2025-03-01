@@ -1,0 +1,31 @@
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:4242/api',
+});
+
+export const register = (userData) => api.post('/users/register', userData);
+export const login = (userData) => api.post('/users/login', userData);
+export const sendMessage = async (messageData) => {
+  const token = localStorage.getItem('token');
+  const response = await api.post('/messages', messageData, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  console.log("Returning after sendMessage API: ", response.data)
+  return response.data;
+}
+export const getMessages = async () => {
+  
+  console.log("get messages has run")
+  const token = localStorage.getItem('token');
+
+  const response = await api.get('/messages', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  
+  return response.data;
+}
