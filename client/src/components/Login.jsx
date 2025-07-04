@@ -9,16 +9,15 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     try {
       const response = await login({
         username,
         password,
       });
-      if(response.status == 200){
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('username', username)
+      if (response.status == 200) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("username", username);
       }
       setMessage(response.data.message);
       console.log(message);
@@ -29,40 +28,39 @@ const Login = () => {
       console.log(message);
     }
   };
+  const handleRegister = () => {
+    navigate("/register");
+  };
 
   return (
     <>
-      <div className="">
-        <h1 className="p-4">Login here!</h1>
-        <form
-          action=""
-          onSubmit={handleSubmit}
-          className="flex flex-col space-y-4"
-        >
-          <label className="p-4" htmlFor="username">
-            Username
-          </label>
+      <div className="login-wrapper">
+        <h1 className="login-text">Welcome to my Chat App!</h1>
+        <div>
+          This application uses Socket.IO to implement a live chat window.{" "}
+        </div>
+        <form action="" onSubmit={handleSubmit} className="form-container">
+          <label htmlFor="username">Username</label>
           <input
-            className="bg-white text-black"
+            className
             type="text"
             placeholder="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label className="p-4" htmlFor="password">
-            Password
-          </label>
+          <label htmlFor="password">Password</label>
           <input
-            className="bg-white text-black"
             type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="bg-white" type="submit">
-            Register
-          </button>
+          <button>Login</button>
         </form>
+        <button className="registerButton" onClick={handleRegister}>
+          Register
+        </button>
+
         {message && <p>{message}</p>}
       </div>
     </>

@@ -23,37 +23,31 @@ const Register = () => {
 
   return (
     <>
-      <div className="">
-        <h1 className="p-4">Register here!</h1>
-        <form
-          action=""
-          onSubmit={handleSubmit}
-          className="flex flex-col space-y-4"
-        >
-          <label className="p-4" htmlFor="username">
-            Username
-          </label>
+      <div className="login-wrapper">
+        <h1 className="login-text">Register here!</h1>
+        <form action="" onSubmit={handleSubmit} className="form-container">
+          <label htmlFor="username">Username</label>
           <input
-            className="bg-white text-black"
             type="text"
             placeholder="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label className="p-4" htmlFor="password">
-            Password
-          </label>
+          <label htmlFor="password">Password</label>
           <input
-            className="bg-white text-black"
             type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="bg-white" type="submit">
-            Register
-          </button>
+          <button type="submit">Register</button>
         </form>
+        <button
+          className="registerButton"
+          onClick={() => (window.location.href = "/login")}
+        >
+          Back To Login
+        </button>
         {message && <p>{message}</p>}
       </div>
     </>
