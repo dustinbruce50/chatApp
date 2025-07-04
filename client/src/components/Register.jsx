@@ -9,6 +9,9 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //return res.status(400).json({ message: "username already taken" });
+      //res.status(201).json({ message: "User Registered Successfully" });
+      //res.status(500).json({ message: "server error", error });
       const response = await register({
         username,
         password,
@@ -16,7 +19,7 @@ const Register = () => {
       setMessage(response.data.message);
       console.log(message);
     } catch (error) {
-      setMessage(error.response?.data?.message || "An error occured");
+      setMessage(error.response?.data?.error || "An error occured");
       console.log(message);
     }
   };

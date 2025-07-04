@@ -11,6 +11,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //return res.status(400).json({ error: "invalid username" });
+      //return res.status(400).json({ error: "invalid password" });
+      //res.json({ token });
       const response = await login({
         username,
         password,
