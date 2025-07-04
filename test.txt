@@ -1,0 +1,14 @@
+      PID    PPID    PGID     WINPID   TTY         UID    STIME COMMAND
+     3406    3405    3406      23440  pty4      197609 14:07:56 /usr/bin/bash
+     3043       1    3043      23256  ?         197609 13:55:13 /usr/bin/mintty
+     3407    3406    3406      29828  pty4      197609 14:07:56 /usr/bin/bash
+     3191    3190    3191      19988  pty3      197609 14:00:18 /c/Program Files/MongoDB/Server/8.1/bin/mongod
+     3405       1    3405      13804  ?         197609 14:07:56 /usr/bin/mintty
+     1083    1082    1083      29184  pty0      197609   Jul  1 /usr/bin/bash
+     2129       1    2129       3748  cons5     197609 13:09:06 /usr/bin/bash
+     3415    3407    3406      14444  pty4      197609 14:07:57 /c/Program Files/nodejs/node
+     3073       1    3073      31836  ?         197609 13:55:26 /usr/bin/mintty
+     3568    2129    3568      27724  cons5     197609 14:11:39 /usr/bin/ps
+     1082       1    1082      25132  ?         197609   Jul  1 /usr/bin/mintty
+     3190       1    3190      36392  ?         197609 14:00:18 /usr/bin/mintty
+     3045    3043    3045      31708  pty1      197609 13:55:13 /usr/bin/bash
