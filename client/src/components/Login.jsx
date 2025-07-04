@@ -24,7 +24,7 @@ const Login = () => {
       navigate("/chat");
     } catch (error) {
       console.log(error);
-      setMessage(error.response?.data?.message || "An error occured");
+      setMessage(error.response?.data?.error || "An error occured");
       console.log(message);
     }
   };

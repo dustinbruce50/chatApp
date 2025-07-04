@@ -4,8 +4,16 @@ const api = axios.create({
   baseURL: 'http://localhost:4242/api',
 });
 
+
+//register.jsx
 export const register = (userData) => api.post('/users/register', userData);
+
+
+//login.jsx
 export const login = (userData) => api.post('/users/login', userData);
+
+
+//chat.jsx
 export const sendMessage = async (messageData) => {
   const token = localStorage.getItem('token');
   const response = await api.post('/messages', messageData, {
