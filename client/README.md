@@ -1,8 +1,21 @@
-# React + Vite
+This project is a simple chat app using Socket.IO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The server is located in /server/server.js. The server uses Mongo DB models to create and interact with the database.
 
-Currently, two official plugins are available:
+The database is hosted in /data. It is a MongoDB instance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The front end is hosted in src. It's a React app created with Vite.
+
+To run/test this project:
+    spin up the db (from root):
+        mongod --dbpath data
+    spin up server(from /server):
+        nodemon server.js
+        you should see a confirmation in the terminal that the db is running.
+    spin up 2 clients(from client):
+        1) npm run dev
+        2) (seperate terminal) port=3001 npm run dev
+
+    
+
+    

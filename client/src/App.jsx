@@ -9,14 +9,12 @@ import ChatNew from "./components/ChatNew.jsx";
 import "./App.css";
 import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
-import socketIO from "socket.io-client"
-
-//const socket = socketIO.connect('http://localhost:4242')
-
+import socketIO from "socket.io-client";
 
 function isAuthenticated() {
   console.log("checking authentication");
-  return true;
+  const token = localStorage.getItem("token");
+  return !!token;
 }
 
 function App() {
@@ -27,11 +25,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={
-            <Register />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/chat"
-            element={isAuthenticated() ? <ChatNew/> : <Navigate to="/login" />}
+            element={isAuthenticated() ? <ChatNew /> : <Navigate to="/login" />}
           />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
