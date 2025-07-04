@@ -27,15 +27,21 @@ const ChatNew = () => {
   }, []);
 
   useEffect(() => {
+
+    //load initial messages from db on server
+    
     console.log("use effect 2 runs");
     const response = getMessages().then((response) => {
       if (response.messages) {
         setMessages(response.messages);
+        //if messages exist, scroll to the bottom
         scrollToBottom();
       }
     });
   }, []);
 
+
+  //scroll to the bottom every time a message is sent/recieved.
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -43,9 +49,16 @@ const ChatNew = () => {
   const handleSendMessage = (e) => {
     e.preventDefault();
 
+    // Prevent sending empty messages
+    if (!message.trim()) {
+      return; 
+    }
+
     const messageData = {
       content: message,
     };
+
+    //call api.js sendMessage function
     sendMessage(messageData);
     setMessage("");
 
@@ -54,16 +67,15 @@ const ChatNew = () => {
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
-    return date.toLocaleString('en-US', {
-      month: '2-digit',
-      day: '2-digit',
-      year: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
+    return date.toLocaleString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: true,
     });
-
-  }
+  };
 
   return (
     <div className="chat-container p-4">
@@ -71,7 +83,9 @@ const ChatNew = () => {
         {console.log(messages)}
         {messages.map((msg, index) => (
           <div key={index} className="message mb-2 grid grid-cols-3">
-            <div className="flex-grow break-words whitespace-normal">{msg.content}</div>
+            <div className="flex-grow break-words whitespace-normal">
+              {msg.content}
+            </div>
 
             <div className="text-right ml-2">{msg.sender?.username}</div>
 

@@ -22,7 +22,6 @@ router.post("/", authenticate, async (req, res) => {
   const user = await User.findById(req.user.userId, 'username');
   try {
     const message = new Message({ sender: user, content });
-    
     await message.save();
     req.io.emit("receiveMessage", message);
     console.log("server emit")
