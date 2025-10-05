@@ -1,0 +1,63 @@
+
+services:
+  mongo:
+    image: mongo:6
+    volumes:
+      - mongo-data:/data/db
+      - ./mongod.conf:/etc/mongod.conf:ro
+    command: ["mongod", "--config", "/etc/mongod.conf", "--bind_ip_all"]
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/chatapp
+      - NODE_ENV=development
+    depends_on:
+      - mongo
+    ports:
+      - "4242:4242"
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    #//command: sh -c "npm install && node server.js"
+    command: [ "sh", "-c", "npm install && node server.js" ]
+
+  client1:
+    build:
+      context: ./client
+      dockerfile: DockerFile
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    volumes: 
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    #command: sh -C "npm install && npm run dev -- --host 0.0.0.0 --port 3000"
+    command: [ "sh", "-c", "npm install && npm run dev -- --host 0.0.0.0 --port 3000" ]
+
+  client2:
+    build:
+      context: ./client
+      dockerfile: DockerFile
+    depends_on:
+      - server
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    #command: sh -C "npm install && npm run dev2 -- --host 0.0.0.0 --port 3001"
+    command: [ "sh", "-c", "npm install && npm run dev2 -- --host 0.0.0.0 --port 3000" ]
+
+volumes:
+  mongo-data:

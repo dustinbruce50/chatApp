@@ -1,9 +1,24 @@
 import axios from "axios";
 
-const api = axios.create({
+
+export const API_BASE =
+  import.meta.env.VITE_API_URL || `http://${window.location.hostname}:4242`;
+
+export const SOCKET_URL =
+  import.meta.env.VITE_SOCKET_URL || `http://${window.location.hostname}:4242`;
+
+
+console.log("[client] API_BASE =", API_BASE, "SOCKET_URL =", SOCKET_URL);
+window.__API_BASE = API_BASE;
+window.__SOCKET_URL = SOCKET_URL;
+
+
+const api = axios.create({ baseURL: `${API_BASE}/api` });
+/**
+ * const api = axios.create({
   baseURL: "http://localhost:4242/api",
 });
-
+**/
 //register.jsx
 export const register = (userData) => api.post("/users/register", userData);
 
@@ -35,6 +50,7 @@ export const getMessages = async () => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+
   });
 
   return response.data;

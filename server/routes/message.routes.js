@@ -24,7 +24,6 @@ router.post("/", authenticate, async (req, res) => {
     const message = new Message({ sender: user, content });
     await message.save();
     req.io.emit("receiveMessage", message);
-    console.log("server emit")
     res.status(201).json({ message });
   } catch (error) {
     console.log("message post error: ", error);
@@ -40,8 +39,7 @@ router.get("/", authenticate, async (req, res) => {
       .sort({ timestamp: 1 });
     res.json({ messages });
   } catch (error) {
-    console.log("inside get api error:", error);
-    
+    console.log("message get error: ", error);
     res.status(500).json({ error: error.message });
   }
 });

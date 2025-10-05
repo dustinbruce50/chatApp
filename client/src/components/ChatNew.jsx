@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getMessages, sendMessage } from "../services/api";
-import io from "socket.io-client";
+import { getMessages, sendMessage, SOCKET_URL } from "../services/api";
+import {io} from "socket.io-client";
 
-const socket = io("http://localhost:4242");
+const socket = io(SOCKET_URL);
 
 const ChatNew = () => {
   const [messages, setMessages] = useState([]);
@@ -13,23 +13,22 @@ const ChatNew = () => {
     messagesEndRef.current?.scrollIntoView({});
   };
 
-  useEffect(() => {
-    console.log("use effect 1 runs");
 
+
+  useEffect(() => {
+    console.log("SOCKET_URL:", SOCKET_URL);
     socket.on("receiveMessage", (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
       scrollToBottom();
     });
-
     return () => {
       socket.off("receiveMessage");
+      //socket.disconnect();
     };
   }, []);
 
   useEffect(() => {
-
     //load initial messages from db on server
-    
     console.log("use effect 2 runs");
     const response = getMessages().then((response) => {
       if (response.messages) {
@@ -80,7 +79,7 @@ const ChatNew = () => {
   return (
     <div className="chat-container p-4">
       <div className="bg-white text-black  mb-6 min-h-48 max-h-48 border-2 overflow-y-auto space-y-4">
-        {console.log(messages)}
+        {/* {console.log(messages)} */}
         {messages.map((msg, index) => (
           <div key={index} className="message mb-2 grid grid-cols-3">
             <div className="flex-grow break-words whitespace-normal">

@@ -1,0 +1,10 @@
+FROM node:20
+
+WORKDIR /usr/src/app
+
+COPY . . 
+
+ENV NPM_CONFIG_LOGLEVEL=error
+RUN npm install
+
+EXPOSE 3000

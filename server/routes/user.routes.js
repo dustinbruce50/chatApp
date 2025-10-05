@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       console.log("User already exists");
-      return res.status(400).json({ message: "username already taken" });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     //salts the pw for comparison to db password
@@ -25,7 +25,6 @@ router.post("/register", async (req, res) => {
     await user.save();
     res.status(201).json({ message: "User Registered Successfully" });
   } catch (error) {
-    console.error("TEST Error: ", error);
     res.status(500).json({ message: "server error", error });
   }
 });
@@ -38,13 +37,13 @@ router.post("/login", async (req, res) => {
     //check username
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).json({ error: "invalid username" });
+      return res.status(400).json({ error: "Invalid Username" });
     }
 
     //check password
     const pwValid = await bcrypt.compare(password, user.password);
     if (!pwValid) {
-      return res.status(400).json({ error: "invalid password" });
+      return res.status(400).json({ error: "Invalid Password" });
     }
 
     //else, create jwt and attach to response
