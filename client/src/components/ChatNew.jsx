@@ -29,7 +29,6 @@ const ChatNew = () => {
 
   useEffect(() => {
     //load initial messages from db on server
-    console.log("use effect 2 runs");
     const response = getMessages().then((response) => {
       if (response.messages) {
         setMessages(response.messages);

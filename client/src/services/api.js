@@ -43,7 +43,6 @@ export const sendMessage = async (messageData) => {
   //return response.data;
 };
 export const getMessages = async () => {
-  console.log("get messages has run");
   const token = localStorage.getItem("token");
 
   const response = await api.get("/messages", {
