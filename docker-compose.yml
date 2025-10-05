@@ -3,7 +3,6 @@ services:
   mongo:
     image: mongo:6
     volumes:
-      - mongo-data:/data/db
       - ./mongod.conf:/etc/mongod.conf:ro
     command: ["mongod", "--config", "/etc/mongod.conf", "--bind_ip_all"]
     restart: unless-stopped
